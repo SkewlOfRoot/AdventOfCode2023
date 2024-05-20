@@ -13,28 +13,20 @@ pub fn run() -> io::Result<()> {
 
 fn part_one() -> Result<(), io::Error> {
     let lines = read_lines_from_file(r".\src\puzzle_day_2\data")?;
-    let mut limit_map: HashMap<&str, u8> = HashMap::new();
-    limit_map.insert("red", 12);
-    limit_map.insert("green", 13);
-    limit_map.insert("blue", 14);
-
+    let limit_map: HashMap<&str, u8> = HashMap::from([("red", 12), ("green", 13), ("blue", 14)]);
     let mut valid_game_ids: Vec<u32> = Vec::new();
 
-    for line in &lines {
+    'outer: for line in &lines {
         let id_and_sample_split: Vec<&str> = line.split(':').collect();
         let id = id_and_sample_split[0].replace("Game ", "");
         let game_samples = get_game_samples(id_and_sample_split[1]);
 
-        let mut add: bool = true;
         for map in game_samples {
             if !check_sample_limit(&limit_map, map) {
-                add = false;
-                break;
+                continue 'outer;
             }
         }
-        if add {
-            valid_game_ids.push(id.parse().unwrap());
-        }
+        valid_game_ids.push(id.parse().unwrap());
     }
 
     let sum: u32 = valid_game_ids.iter().sum();
