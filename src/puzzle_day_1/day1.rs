@@ -18,7 +18,7 @@ fn part_one() -> io::Result<()> {
 
 fn part_two() -> io::Result<()> {
     let lines = get_lines_from_file()?;
-    let numbers: Vec<u8> = get_numbers_from_lines_v2(&lines);
+    let numbers: Vec<u8> = get_numbers_from_lines_v2(lines);
 
     let sum: u32 = numbers.iter().map(|&num| num as u32).sum();
     println!("Answer part 2: {}", sum);
@@ -53,7 +53,7 @@ fn get_numbers_from_lines(lines: Vec<String>) -> Vec<u8> {
     }
     numbers
 }
-fn get_numbers_from_lines_v2(lines: &Vec<String>) -> Vec<u8> {
+fn get_numbers_from_lines_v2(lines: Vec<String>) -> Vec<u8> {
     let number_vec: Vec<(&str, &str)> = vec![
         ("one", "o1ne"),
         ("two", "t2o"),
