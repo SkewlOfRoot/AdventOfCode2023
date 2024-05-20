@@ -1,21 +1,34 @@
 use std::fs::File;
 use std::io::{self, BufRead};
 
-pub fn run() -> io::Result<()> {
-    println!("hello!");
+pub fn run() {
+    part_one().unwrap();
+    part_two().unwrap();
+}
 
-    // let lines = [
-    //     "1abc2",
-    //     "pqr3stu8vwx",
-    //     "a1b2c3d4e5f",
-    //     "treb7uchet",
-    //     "one",
-    //     "x",
-    // ];
+fn part_one() -> io::Result<()> {
+    let lines = get_lines_from_file()?;
+    let numbers: Vec<u32> = get_numbers_from_lines(lines);
+
+    let sum: u32 = numbers.iter().sum();
+    println!("Answer part 1: {}", sum);
+
+    Ok(())
+}
+
+fn part_two() -> io::Result<()> {
     let lines = get_lines_from_file()?;
 
-    let mut numbers: Vec<u32> = Vec::new();
+    let numbers: Vec<u32> = get_numbers_from_lines_v2(lines);
 
+    let sum: u32 = numbers.iter().sum();
+    println!("Answer part 2: {}", sum);
+
+    Ok(())
+}
+
+fn get_numbers_from_lines(lines: Vec<String>) -> Vec<u32> {
+    let mut numbers: Vec<u32> = Vec::new();
     for line in lines {
         let mut number_string = String::new();
 
@@ -39,12 +52,53 @@ pub fn run() -> io::Result<()> {
             numbers.push(number_string.parse().unwrap());
         }
     }
+    numbers
+}
+fn get_numbers_from_lines_v2(lines: Vec<String>) -> Vec<u32> {
+    let number_vec: Vec<(&str, &str)> = vec![
+        ("one", "o1ne"),
+        ("two", "t2o"),
+        ("three", "thr3e"),
+        ("four", "fo4ur"),
+        ("five", "fi5e"),
+        ("six", "s6x"),
+        ("seven", "se7en"),
+        ("eight", "eig8ht"),
+        ("nine", "n9ne"),
+    ];
 
-    println!("{:?}", numbers);
-    let sum: u32 = numbers.iter().sum();
-    println!("Sum is: {}", sum);
+    let mut numbers: Vec<u32> = Vec::new();
 
-    Ok(())
+    for line in lines {
+        let mut line = line;
+
+        for v in &number_vec {
+            line = String::from(&line.replace(v.0, v.1))
+        }
+
+        let mut number_string = String::new();
+        // Loop through line forwards
+        for c in line.chars() {
+            if c.is_numeric() {
+                number_string.push(c);
+                break;
+            }
+        }
+
+        // // Loop through line backwards
+        for c in line.chars().rev() {
+            if c.is_numeric() {
+                number_string.push(c);
+                break;
+            }
+        }
+
+        if number_string.len() > 0 {
+            let number = number_string.parse().unwrap();
+            numbers.push(number);
+        }
+    }
+    numbers
 }
 
 fn get_lines_from_file() -> io::Result<Vec<String>> {
