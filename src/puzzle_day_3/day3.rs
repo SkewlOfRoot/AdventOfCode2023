@@ -31,9 +31,10 @@ fn part_one() -> Result<(), io::Error> {
             flagged_numbers.push(number);
         }
     }
+
     let sum: u32 = flagged_numbers.iter().sum();
-    //println!("{:#?}", flagged_numbers);
     println!("Day 3 part 1 answer: {}", sum);
+
     Ok(())
 }
 
@@ -102,7 +103,6 @@ impl Slice {
 
         for n in self.map.clone() {
             let number_length = n.1.to_string().len();
-            let mut flagged: bool = false;
             let min_range = if n.0 == 0 { 0 } else { n.0 - 1 };
             let max_range = if n.0 + number_length == self.line_main.len() {
                 n.0 + number_length
@@ -112,47 +112,14 @@ impl Slice {
             let index_range = min_range..max_range;
 
             if is_symbol_within_index(self.line_main.as_str(), index_range.clone().collect()) {
-                flagged = true;
+                flagged_numbers.push(n.1)
             } else if self.line_above.len() > 0
                 && is_symbol_within_index(&self.line_above, index_range.clone().collect())
             {
-                flagged = true;
+                flagged_numbers.push(n.1)
             } else if self.line_below.len() > 0
                 && is_symbol_within_index(&self.line_below, index_range.clone().collect())
             {
-                flagged = true;
-            }
-            // test test test
-            /*
-            if !flagged {
-                if self.line_above.len() > 0 {
-                    for i in index_range.clone() {
-                        //println!("yo!: {}", n.1);
-                        let found_char = self.line_above.char_indices().find(|x| x.0 == i).unwrap();
-                        print!("{}", found_char.1);
-                    }
-                    println!();
-                }
-
-                for i in index_range.clone() {
-                    let found_char = self.line_main.char_indices().find(|x| x.0 == i).unwrap();
-                    print!("{}", found_char.1);
-                }
-                println!();
-
-                if self.line_below.len() > 0 {
-                    for i in index_range.clone() {
-                        let found_char = self.line_below.char_indices().find(|x| x.0 == i).unwrap();
-                        print!("{}", found_char.1);
-                    }
-                    println!();
-                }
-                println!();
-            }
-            */
-            // test test test
-
-            if flagged {
                 flagged_numbers.push(n.1)
             }
         }
