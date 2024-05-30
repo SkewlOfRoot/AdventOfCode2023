@@ -3,15 +3,12 @@ use std::io;
 
 pub fn run() -> io::Result<()> {
     part_one()?;
-
     Ok(())
 }
 
 fn part_one() -> Result<(), io::Error> {
     let lines = read_lines_from_file(r".\src\puzzle_day_4\data")?;
-
     let mut cards: Vec<Card> = Vec::new();
-
     let mut results: Vec<u32> = Vec::new();
 
     for line in lines {
