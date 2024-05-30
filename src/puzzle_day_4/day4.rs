@@ -15,7 +15,6 @@ fn part_one() -> Result<(), io::Error> {
     let mut results: Vec<u32> = Vec::new();
 
     for line in lines {
-        //println!("{}", line);
         let card = Card::new(line);
         //println!("{:?} win: {:?}", card, card.get_winning_numbers());
 
@@ -28,7 +27,6 @@ fn part_one() -> Result<(), io::Error> {
                 result *= 2;
             }
         }
-        //println!("{}", result);
         results.push(result);
         cards.push(card);
     }
@@ -50,17 +48,15 @@ impl Card {
         let l = line.split(':').last().unwrap();
         let card_split: Vec<&str> = l.split('|').map(|x| x.trim()).collect();
 
-        let winning_numbers: Vec<u8> = card_split[0]
-            .replace("  ", " ")
-            .split(' ')
-            .map(|x| x.parse::<u8>().unwrap())
-            .collect();
+        let extract_numbers = |text: &str| -> Vec<u8> {
+            text.replace("  ", " ")
+                .split(' ')
+                .map(|x| x.parse::<u8>().unwrap())
+                .collect()
+        };
 
-        let played_numbers: Vec<u8> = card_split[1]
-            .replace("  ", " ")
-            .split(' ')
-            .map(|x| x.parse::<u8>().unwrap())
-            .collect();
+        let winning_numbers: Vec<u8> = extract_numbers(card_split[0]);
+        let played_numbers: Vec<u8> = extract_numbers(card_split[1]);
 
         Card {
             winning_numbers,
