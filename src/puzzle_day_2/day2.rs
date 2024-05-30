@@ -95,5 +95,5 @@ fn check_sample_limit(limit_map: &HashMap<&str, u8>, sample_map: HashMap<&str, u
             return false;
         }
     }
-    return true;
+    true
 }

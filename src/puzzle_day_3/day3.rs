@@ -50,8 +50,8 @@ impl Slice {
     fn new(line: String, line_above: String, line_below: String) -> Slice {
         let mut s = Slice {
             line_main: line,
-            line_above: line_above,
-            line_below: line_below,
+            line_above,
+            line_below,
             map: HashMap::new(),
         };
         s.map_numbers();
@@ -64,7 +64,7 @@ impl Slice {
 
         for c in self.line_main.char_indices() {
             if c.1.is_numeric() {
-                if number_string.len() == 0 {
+                if number_string.is_empty() {
                     number_start_index = c.0;
                 }
                 number_string.push(c.1);
@@ -74,7 +74,7 @@ impl Slice {
                         .insert(number_start_index, number_string.parse().unwrap());
                 }
             } else {
-                if number_string.len() > 0 {
+                if !number_string.is_empty() {
                     self.map
                         .insert(number_start_index, number_string.parse().unwrap());
                 }
@@ -98,7 +98,7 @@ impl Slice {
                 }
                 continue;
             }
-            return false;
+            false
         };
 
         for n in self.map.clone() {
@@ -111,14 +111,11 @@ impl Slice {
             };
             let index_range = min_range..max_range;
 
-            if is_symbol_within_index(self.line_main.as_str(), index_range.clone().collect()) {
-                flagged_numbers.push(n.1)
-            } else if self.line_above.len() > 0
-                && is_symbol_within_index(&self.line_above, index_range.clone().collect())
-            {
-                flagged_numbers.push(n.1)
-            } else if self.line_below.len() > 0
-                && is_symbol_within_index(&self.line_below, index_range.clone().collect())
+            if is_symbol_within_index(self.line_main.as_str(), index_range.clone().collect())
+                || !self.line_above.is_empty()
+                    && is_symbol_within_index(&self.line_above, index_range.clone().collect())
+                || !self.line_below.is_empty()
+                    && is_symbol_within_index(&self.line_below, index_range.clone().collect())
             {
                 flagged_numbers.push(n.1)
             }

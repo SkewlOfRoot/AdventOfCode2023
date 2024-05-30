@@ -48,7 +48,7 @@ fn get_numbers_from_lines(lines: Vec<String>) -> Vec<u8> {
             }
         }
 
-        if number_string.len() > 0 {
+        if !number_string.is_empty() {
             numbers.push(number_string.parse().unwrap());
         }
     }
@@ -69,7 +69,7 @@ fn get_numbers_from_lines_v2(lines: Vec<String>) -> Vec<u8> {
 
     let mut replaced_lines: Vec<String> = vec![];
     for line in lines {
-        let mut line: String = String::from(line);
+        let mut line: String = line;
 
         for v in &number_vec {
             line = line.replace(v.0, v.1)
