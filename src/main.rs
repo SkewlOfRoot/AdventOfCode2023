@@ -4,13 +4,14 @@ mod puzzle_day_3;
 mod puzzle_day_4;
 mod utils;
 
+use std::error::Error;
+
 use crate::puzzle_day_1::day1;
 use crate::puzzle_day_2::day2;
 use crate::puzzle_day_3::day3;
 use crate::puzzle_day_4::day4;
-use std::io::{self};
 
-fn main() -> io::Result<()> {
+fn main() -> Result<(), Box<dyn Error>> {
     let run_day: u8 = 4;
 
     match run_day {

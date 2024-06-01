@@ -1,13 +1,13 @@
 use crate::utils::file_utils::read_lines_from_file;
-use std::io::{self};
+use std::error::Error;
 
-pub fn run() -> io::Result<()> {
+pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
     Ok(())
 }
 
-fn part_one() -> io::Result<()> {
+fn part_one() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_1\data")?;
     let numbers: Vec<u8> = get_numbers_from_lines(lines);
 
@@ -17,7 +17,7 @@ fn part_one() -> io::Result<()> {
     Ok(())
 }
 
-fn part_two() -> io::Result<()> {
+fn part_two() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_1\data")?;
     let numbers: Vec<u8> = get_numbers_from_lines_v2(lines);
 

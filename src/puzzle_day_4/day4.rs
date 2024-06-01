@@ -1,19 +1,20 @@
 use crate::utils::file_utils::read_lines_from_file;
-use std::io;
+use std::collections::HashMap;
+use std::error::Error;
 
-pub fn run() -> io::Result<()> {
+pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
+    part_two()?;
     Ok(())
 }
 
-fn part_one() -> Result<(), io::Error> {
+fn part_one() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_4\data")?;
     let mut cards: Vec<Card> = Vec::new();
     let mut results: Vec<u32> = Vec::new();
 
     for line in lines {
         let card = Card::new(line);
-        //println!("{:?} win: {:?}", card, card.get_winning_numbers());
 
         let mut result: u32 = 0;
 
@@ -30,6 +31,53 @@ fn part_one() -> Result<(), io::Error> {
 
     let sum: u32 = results.iter().sum();
     println!("Part 1 answer: {}", sum);
+
+    Ok(())
+}
+
+fn part_two() -> Result<(), Box<dyn Error>> {
+    let lines = read_lines_from_file(r".\src\puzzle_day_4\data")?;
+    let mut cards: Vec<Card> = Vec::new();
+
+    // HashMap with card number, number of winning numbers.
+    let mut cmap: HashMap<usize, u8> = HashMap::new();
+
+    for (index, line) in lines.iter().enumerate() {
+        let card = Card::new(line.to_string());
+        let n_winning_numbers: u8 = card.get_winning_numbers().len().try_into().unwrap();
+        cmap.insert(index + 1, n_winning_numbers);
+        cards.push(card);
+    }
+
+    let mut vec: Vec<(usize, u8)> = cmap.iter().map(|(&k, &v)| (k, v)).collect();
+    vec.sort_by(|a, b| a.0.cmp(&b.0));
+
+    // HashMap with card number, total number of that card.
+    let mut rmap: HashMap<usize, u32> = HashMap::new();
+
+    // Instantiate result map with 1 of each card.
+    for (index, _c) in &vec {
+        rmap.insert(*index, 1);
+    }
+
+    for (index, c) in &vec {
+        if *c == 0 {
+            continue;
+        } else {
+            let r = rmap.get(index).unwrap();
+            for _rcount in 0..*r as usize {
+                let min_range: usize = index + 1;
+                let max_range: usize = index + 1 + *c as usize;
+                for i in min_range..max_range {
+                    let res = rmap.entry(i).or_insert(0);
+                    *res += 1;
+                }
+            }
+        }
+    }
+
+    let sum: u32 = rmap.values().sum();
+    println!("Part 2 answer: {}", sum);
 
     Ok(())
 }

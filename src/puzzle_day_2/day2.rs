@@ -1,17 +1,17 @@
 use std::collections::hash_map::Entry::{Occupied, Vacant};
 use std::collections::HashMap;
-use std::io;
+use std::error::Error;
 
 use crate::utils::file_utils::read_lines_from_file;
 
-pub fn run() -> io::Result<()> {
+pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
 
     Ok(())
 }
 
-fn part_one() -> Result<(), io::Error> {
+fn part_one() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_2\data")?;
     let limit_map: HashMap<&str, u8> = HashMap::from([("red", 12), ("green", 13), ("blue", 14)]);
     let mut valid_game_ids: Vec<u32> = Vec::new();
@@ -35,7 +35,7 @@ fn part_one() -> Result<(), io::Error> {
     Ok(())
 }
 
-fn part_two() -> Result<(), io::Error> {
+fn part_two() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_2\data")?;
 
     let mut products: Vec<u32> = Vec::new();

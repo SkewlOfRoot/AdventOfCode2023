@@ -1,15 +1,15 @@
 use std::collections::HashMap;
-use std::io;
+use std::error::Error;
 
 use crate::utils::file_utils::read_lines_from_file;
 
-pub fn run() -> io::Result<()> {
+pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
 
     Ok(())
 }
 
-fn part_one() -> Result<(), io::Error> {
+fn part_one() -> Result<(), Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\puzzle_day_3\data")?;
 
     let mut flagged_numbers: Vec<u32> = Vec::new();
