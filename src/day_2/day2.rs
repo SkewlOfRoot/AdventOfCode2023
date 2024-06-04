@@ -12,7 +12,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_one() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\puzzle_day_2\data")?;
+    let lines = read_lines_from_file(r".\src\day_2\data")?;
     let limit_map: HashMap<&str, u8> = HashMap::from([("red", 12), ("green", 13), ("blue", 14)]);
     let mut valid_game_ids: Vec<u32> = Vec::new();
 
@@ -36,7 +36,7 @@ fn part_one() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_two() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\puzzle_day_2\data")?;
+    let lines = read_lines_from_file(r".\src\day_2\data")?;
 
     let mut products: Vec<u32> = Vec::new();
 

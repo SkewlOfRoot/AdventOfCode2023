@@ -9,7 +9,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_one() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\puzzle_day_4\data")?;
+    let lines = read_lines_from_file(r".\src\day_4\data")?;
     let mut cards: Vec<Card> = Vec::new();
     let mut results: Vec<u32> = Vec::new();
 
@@ -36,7 +36,7 @@ fn part_one() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_two() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\puzzle_day_4\data")?;
+    let lines = read_lines_from_file(r".\src\day_4\data")?;
     let mut cards: Vec<Card> = Vec::new();
 
     // HashMap with card number, number of winning numbers.

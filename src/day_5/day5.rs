@@ -91,7 +91,7 @@ fn part_two() -> Result<(), Box<dyn Error>> {
 }
 
 fn load_values() -> Result<MapCatalog, Box<dyn Error>> {
-    let lines = read_lines_from_file(r"..\..\src\puzzle_day_5\data")?;
+    let lines = read_lines_from_file(r".\src\day_5\data")?;
 
     let mut categories: Vec<MapCategory> = Vec::new();
     let mut category: MapCategory = MapCategory::new(String::from("init"));

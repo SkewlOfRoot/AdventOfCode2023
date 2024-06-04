@@ -1,17 +1,17 @@
-mod puzzle_day_1;
-mod puzzle_day_2;
-mod puzzle_day_3;
-mod puzzle_day_4;
-mod puzzle_day_5;
+mod day_1;
+mod day_2;
+mod day_3;
+mod day_4;
+mod day_5;
 mod utils;
 
 use std::error::Error;
 
-use crate::puzzle_day_1::day1;
-use crate::puzzle_day_2::day2;
-use crate::puzzle_day_3::day3;
-use crate::puzzle_day_4::day4;
-use crate::puzzle_day_5::day5;
+use crate::day_1::day1;
+use crate::day_2::day2;
+use crate::day_3::day3;
+use crate::day_4::day4;
+use crate::day_5::day5;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let run_day: u8 = 5;
