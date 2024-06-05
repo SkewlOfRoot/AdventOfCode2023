@@ -95,14 +95,13 @@ impl Race {
     }
 
     fn get_pos_outcomes(self) -> u64 {
-        let mut possible_outcomes: u64 = 0;
-        for i in 0..=self.time_limit {
-            let result = calc_dist_traveled(i, self.time_limit);
-            if result > self.dist_record {
-                possible_outcomes += 1;
-            }
-        }
-        possible_outcomes
+        let pos_outcomes: u64 = (0..=self.time_limit)
+            .filter(|i| calc_dist_traveled(*i, self.time_limit) > self.dist_record)
+            .count()
+            .try_into()
+            .unwrap();
+
+        pos_outcomes
     }
 }
 
