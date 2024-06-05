@@ -34,25 +34,20 @@ fn load_races_part1() -> Result<Vec<Race>, Box<dyn Error>> {
     let lines = read_lines_from_file(r".\src\day_6\data")?;
     let time_line = lines.first().unwrap();
     let distance_line = lines.last().unwrap();
-    let times: Vec<u64> = time_line
-        .split(':')
-        .last()
-        .unwrap()
-        .trim()
-        .split(' ')
-        .filter(|x| !x.is_empty())
-        .map(|x| x.parse::<u64>().unwrap())
-        .collect();
-    let distances: Vec<u64> = distance_line
-        .split(':')
-        .last()
-        .unwrap()
-        .trim()
-        .split(' ')
-        .filter(|x| !x.is_empty())
-        .map(|x| x.parse::<u64>().unwrap())
-        .collect();
 
+    let extract = |line: &String| -> Vec<u64> {
+        line.split(':')
+            .last()
+            .unwrap()
+            .trim()
+            .split(' ')
+            .filter(|x| !x.is_empty())
+            .map(|x| x.parse::<u64>().unwrap())
+            .collect()
+    };
+
+    let times: Vec<u64> = extract(time_line);
+    let distances: Vec<u64> = extract(distance_line);
     let time_dist_sets: Vec<(u64, u64)> = times.into_iter().zip(distances).collect();
     let mut races: Vec<Race> = Vec::new();
 
@@ -67,24 +62,19 @@ fn load_race_part2() -> Result<Race, Box<dyn Error>> {
     let time_line = lines.first().unwrap();
     let distance_line = lines.last().unwrap();
 
-    let time_string: String = time_line
-        .split(':')
-        .last()
-        .unwrap()
-        .trim()
-        .chars()
-        .filter(|&x| x != ' ')
-        .collect();
-    let time: u64 = time_string.parse::<u64>().unwrap();
+    let extract = |line: &String| -> String {
+        line.split(':')
+            .last()
+            .unwrap()
+            .trim()
+            .chars()
+            .filter(|&x| x != ' ')
+            .collect()
+    };
 
-    let distance_string: String = distance_line
-        .split(':')
-        .last()
-        .unwrap()
-        .trim()
-        .chars()
-        .filter(|&x| x != ' ')
-        .collect();
+    let time_string: String = extract(time_line);
+    let time: u64 = time_string.parse::<u64>().unwrap();
+    let distance_string: String = extract(distance_line);
     let distance: u64 = distance_string.parse::<u64>().unwrap();
 
     Ok(Race::new(time, distance))
