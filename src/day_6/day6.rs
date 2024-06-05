@@ -16,7 +16,6 @@ fn part_one() -> Result<(), Box<dyn Error>> {
     }
 
     let product: u64 = results.iter().product();
-
     println!("Part one answer: {}", product);
 
     Ok(())
@@ -76,7 +75,6 @@ fn load_race_part2() -> Result<Race, Box<dyn Error>> {
         .chars()
         .filter(|&x| x != ' ')
         .collect();
-
     let time: u64 = time_string.parse::<u64>().unwrap();
 
     let distance_string: String = distance_line
@@ -87,7 +85,6 @@ fn load_race_part2() -> Result<Race, Box<dyn Error>> {
         .chars()
         .filter(|&x| x != ' ')
         .collect();
-
     let distance: u64 = distance_string.parse::<u64>().unwrap();
 
     Ok(Race::new(time, distance))
@@ -118,6 +115,7 @@ impl Race {
         possible_outcomes
     }
 }
+
 fn calc_dist_traveled(cook_time: u64, time_limit: u64) -> u64 {
     let travel_time = time_limit - cook_time;
     cook_time * travel_time
