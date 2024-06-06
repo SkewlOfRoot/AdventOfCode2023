@@ -4,7 +4,7 @@ use std::error::Error;
 
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
-    //part_two()?;
+    part_two()?;
     Ok(())
 }
 
@@ -13,7 +13,6 @@ fn part_one() -> Result<(), Box<dyn Error>> {
     let hands: Vec<Hand> = lines.iter().map(|l| Hand::from(l)).collect();
 
     let mut hands_map: HashMap<HandStrength, Vec<Hand>> = HashMap::new();
-
     for h in hands {
         hands_map.entry(h.strength).or_default().push(h.clone());
     }
@@ -40,23 +39,18 @@ fn part_one() -> Result<(), Box<dyn Error>> {
     }
 
     let sum: u64 = winnings.iter().sum();
-
     println!("Part one answer: {}", sum);
-
     Ok(())
 }
 
-// fn part_two() -> Result<(), Box<dyn Error>> {
-//     println!("Part two answer: {}", 0);
-
-//     Ok(())
-// }
+fn part_two() -> Result<(), Box<dyn Error>> {
+    println!("Part two answer: {}", 0);
+    Ok(())
+}
 
 #[derive(Debug, Clone)]
 struct Hand {
-    //cards: String,
     bid: u32,
-    //card_map: HashMap<char, u8>,
     strength: HandStrength,
     sort_val: String,
 }
@@ -115,9 +109,7 @@ impl Hand {
         }
 
         Hand {
-            //cards,
             bid,
-            //card_map,
             strength,
             sort_val,
         }
