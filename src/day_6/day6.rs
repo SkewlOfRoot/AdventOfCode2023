@@ -10,10 +10,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 fn part_one() -> Result<(), Box<dyn Error>> {
     let races = load_races_part1()?;
 
-    let mut results: Vec<u64> = Vec::new();
-    for r in races {
-        results.push(r.get_pos_outcomes());
-    }
+    let results: Vec<u64> = races.into_iter().map(|r| r.get_pos_outcomes()).collect();
 
     let product: u64 = results.iter().product();
     println!("Part one answer: {}", product);
