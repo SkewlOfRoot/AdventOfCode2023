@@ -4,6 +4,8 @@ use std::error::Error;
 use std::ops::RangeInclusive;
 use std::sync::{Arc, Mutex};
 
+const DATA_FILE: &str = r".\src\day_5\data";
+
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
@@ -91,7 +93,7 @@ fn part_two() -> Result<(), Box<dyn Error>> {
 }
 
 fn load_values() -> Result<MapCatalog, Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_5\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
 
     let mut categories: Vec<MapCategory> = Vec::new();
     let mut category: MapCategory = MapCategory::new(String::from("init"));

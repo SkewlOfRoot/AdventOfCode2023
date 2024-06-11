@@ -1,6 +1,8 @@
 use crate::utils::file_utils::read_lines_from_file;
 use std::error::Error;
 
+const DATA_FILE: &str = r".\src\day_1\data";
+
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
@@ -8,7 +10,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_one() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_1\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let numbers: Vec<u8> = get_numbers_from_lines(lines);
 
     let sum: u32 = numbers.iter().map(|&num| num as u32).sum();
@@ -18,7 +20,7 @@ fn part_one() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_two() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_1\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let numbers: Vec<u8> = get_numbers_from_lines_v2(lines);
 
     let sum: u32 = numbers.iter().map(|&num| num as u32).sum();

@@ -1,6 +1,8 @@
 use crate::utils::file_utils::read_lines_from_file;
 use std::error::Error;
 
+const DATA_FILE: &str = r".\src\day_6\data";
+
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
@@ -28,7 +30,7 @@ fn part_two() -> Result<(), Box<dyn Error>> {
 }
 
 fn load_races_part1() -> Result<Vec<Race>, Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_6\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let time_line = lines.first().unwrap();
     let distance_line = lines.last().unwrap();
 
@@ -55,7 +57,7 @@ fn load_races_part1() -> Result<Vec<Race>, Box<dyn Error>> {
 }
 
 fn load_race_part2() -> Result<Race, Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_6\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let time_line = lines.first().unwrap();
     let distance_line = lines.last().unwrap();
 

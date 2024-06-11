@@ -2,6 +2,8 @@ use crate::utils::file_utils::read_lines_from_file;
 use std::collections::HashMap;
 use std::error::Error;
 
+const DATA_FILE: &str = r".\src\day_4\data";
+
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
     part_two()?;
@@ -9,7 +11,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_one() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_4\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let mut cards: Vec<Card> = Vec::new();
     let mut results: Vec<u32> = Vec::new();
 
@@ -36,7 +38,7 @@ fn part_one() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_two() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_4\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
     let mut cards: Vec<Card> = Vec::new();
 
     // HashMap with card number, number of winning numbers.

@@ -3,6 +3,8 @@ use std::error::Error;
 
 use crate::utils::file_utils::read_lines_from_file;
 
+const DATA_FILE: &str = r".\src\day_3\data";
+
 pub fn run() -> Result<(), Box<dyn Error>> {
     part_one()?;
 
@@ -10,7 +12,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
 }
 
 fn part_one() -> Result<(), Box<dyn Error>> {
-    let lines = read_lines_from_file(r".\src\day_3\data")?;
+    let lines = read_lines_from_file(DATA_FILE)?;
 
     let mut flagged_numbers: Vec<u32> = Vec::new();
 
